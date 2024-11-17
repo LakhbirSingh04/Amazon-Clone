@@ -85,7 +85,15 @@ document.querySelectorAll('.js-add-to-cart')                //what happens when 
       });
     }
    
-    console.log(cart);
+    let cartQuantity = 0;
+
+    cart.forEach((item) => {                                     // increasing cart quantity with added the products on the page
+     cartQuantity += item.quantity;
+    });
+
+
+    document.querySelector('.js-cart-quantity')                  // updating the cart quantity on the webpage
+    .innerHTML = cartQuantity;
   });
 })
 
