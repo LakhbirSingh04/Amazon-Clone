@@ -49,17 +49,43 @@ products.forEach( (product) => {
           Added
         </div>
 
-        <button class="add-to-cart-button button-primary">
+        <button class="add-to-cart-button button-primary
+        js-add-to-cart"
+        data-product-id="${product.id}">
           Add to Cart
         </button>
       </div>
   `;
 });
 
-console.log(productsHTML);
 
 document.querySelector('.js-products-grid').
-innerHTML = productsHTML;    //Inner html to change the HTML in product grid with generation in new HTML
+innerHTML = productsHTML;                                   //Inner html to change the HTML in product grid with generation in new HTML
 
+document.querySelectorAll('.js-add-to-cart')                //what happens when we click add to cart button on the website
+.forEach ((button) => {                                     // Running the loop so we can keep getting the id of product multiple times if the button is clicked multiple times
+    button.addEventListener('click',() => {    
+    const productId = button.dataset.                     // Saving the id in "productID" getting from clikcing the add to cart button
+    productId;
 
+    let matchingItem;
+
+   cart.forEach((item) => {                                   //checking if the product is already in the cart 
+   if (productId === item.productId)
+    matchingItem = item;
+   })
+
+   if(matchingItem) {                                         //If it is, +1 the quantity of it
+    matchingItem.quantity +=1;
+   }  else {                                                   //else
+
+    cart.push({                                               //adding it in the cart object
+      productId: productId,                    
+      quantity: 1
+      });
+    }
+   
+    console.log(cart);
+  });
+})
 
